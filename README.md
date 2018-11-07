@@ -3,6 +3,7 @@
 Technology stack:
 
 * Spring 5 MVC 
+* Spring Security 
 * Spring Data JPA
 * Hibernate 5.3
 * Lombok

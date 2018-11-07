@@ -6,11 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-public class MyRest {
+@RequestMapping("user")
+public class UserRest {
 
     @Autowired
     private UserService userService;
@@ -22,17 +24,19 @@ public class MyRest {
     }
 
     @GetMapping("/list")
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     protected ResponseEntity findAllUser() {
         log.debug("findAllUser");
         return new ResponseEntity(userService.findAllUser(), HttpStatus.OK);
     }
 
-    @PostMapping("/user")
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseBody
     protected ResponseEntity createUser(@RequestBody User u) {
         log.debug("createUser");
-        userService.createUser(u.getName());
+        userService.createUser(u);
         return new ResponseEntity( HttpStatus.OK);
     }
 }

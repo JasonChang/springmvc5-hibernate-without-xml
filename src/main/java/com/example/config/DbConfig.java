@@ -37,6 +37,8 @@ public class DbConfig {
     String showSql;
     @Value("${hibernate.hbm2ddl.auto}")
     String hbm2ddlAuto;
+    @Value("${hibernate.hbm2ddl.import_files}")
+    String hbm2ddlImport;
 
 
     @Bean
@@ -58,6 +60,7 @@ public class DbConfig {
         jpaProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         jpaProperties.setProperty("hibernate.show_sql", showSql);
         jpaProperties.setProperty("hibernate.dialect", dialect);
+        jpaProperties.setProperty("hibernate.hbm2ddl.import_files", hbm2ddlImport);
         emf.setJpaProperties(jpaProperties);
         emf.setDataSource(dataSource);
         return emf;
